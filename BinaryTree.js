@@ -25,12 +25,32 @@ class BinaryTree {
             }
         }
     }
+
+    getNodeByValue(value) {
+        if (typeof value !== 'number') {
+            throw Error('Must be a Number');
+        } else {
+            if (this.value === value) {
+                return this;
+            } else if (this.left && value < this.value) {
+                return this.left.getNodeByValue(value);
+            } else if (this.right && value > this.value) {
+                return this.right.getNodeByValue(value);
+            } else {
+                return null;
+            }
+        }
+    }
 }
 
 const bt = new BinaryTree(50);
-for (let i = 0; i < 20; i++) {
-    const random = Math.floor(Math.random() * 100);
-    bt.insert(random);
-}
+bt.insert(25);
+bt.insert(75);
+bt.insert(10);
+bt.insert(35);
+bt.insert(60);
+bt.insert(90);
 
-console.log(bt);
+console.log(bt.getNodeByValue(5));
+
+//console.log(bt);
