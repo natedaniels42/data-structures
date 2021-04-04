@@ -75,6 +75,35 @@ class LinkedList {
         return current;
     }
 
+    removeByData(data) {
+        if (!this.head) {
+            return null;
+        }
+
+        let current = this.head;
+        let previous = null;
+
+        
+        while (current) {
+            if (current.data === data) {
+                if (!previous) {
+                    this.head = current.getNextNode();
+                } else {
+                    previous.setNextNode(current.getNextNode());
+                }
+                current.setNextNode(null);
+                this.size--;
+                return current;
+            }
+            previous = current;
+            current = current.getNextNode(); 
+        }
+        
+        if (!current) {
+            return null;
+        }
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
@@ -95,6 +124,11 @@ list.addToHead(2);
 list.addToHead(3);
 list.addToTail(4);
 list.addToTail(5);
+list.removeByData(1);
+list.removeByData(2);
+list.removeByData(5);
+list.removeByData(3);
+list.removeByData(4);
 
 console.log(list.size);
 console.log(list.printList());
