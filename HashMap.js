@@ -85,11 +85,4 @@ class HashMap {
     }
 }
 
-const hm = new HashMap(4);
-hm.assign('cat', 'Felix');
-hm.assign('act', 'Play');
-hm.assign('tac', 'Tic');
-hm.assign('cat', 'Garfield');
-hm.remove('cat');
-
-console.log(hm.hashmap[0]);
+module.exports = HashMap;
