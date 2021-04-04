@@ -54,6 +54,35 @@ class HashMap {
             return null;
         }
     }
+
+    remove(key) {
+        const arrayIndex = this.hash(key);
+        const list = this.hashmap[arrayIndex];
+
+        if (!list.head) {
+            return null;
+        }
+        
+        let current = list.head;
+        let previous = null;
+
+        while(current) {
+            if (current.data.key === key) {
+                if (previous) {
+                    previous.setNextNode(current.getNextNode());
+                } else {
+                    list.head = current.getNextNode();
+                }
+                current.setNextNode(null);
+                list.size--;
+                return current;
+            }
+            previous = current;
+            current = current.getNextNode();
+        }
+
+        return null;
+    }
 }
 
 const hm = new HashMap(4);
@@ -61,5 +90,6 @@ hm.assign('cat', 'Felix');
 hm.assign('act', 'Play');
 hm.assign('tac', 'Tic');
 hm.assign('cat', 'Garfield');
+hm.remove('cat');
 
-console.log(hm.retrieve('tac'));
+console.log(hm.hashmap[0]);
