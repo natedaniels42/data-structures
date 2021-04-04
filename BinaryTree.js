@@ -43,14 +43,4 @@ class BinaryTree {
     }
 }
 
-const bt = new BinaryTree(50);
-bt.insert(25);
-bt.insert(75);
-bt.insert(10);
-bt.insert(35);
-bt.insert(60);
-bt.insert(90);
-
-console.log(bt.getNodeByValue(5));
-
-//console.log(bt);
+module.exports = BinaryTree;
