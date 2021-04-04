@@ -36,6 +36,24 @@ class LinkedList {
         return removedHead;
     }
 
+    addToTail(data) {
+        const newTail = new Node(data);
+
+        if (!this.head) {
+            this.head = newTail;
+        } else {
+            let current = this.head;
+
+            while(current.getNextNode()) {
+                current = current.getNextNode();
+            }
+
+            current.setNextNode(newTail);
+        }
+
+        this.size++;
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
@@ -54,10 +72,8 @@ const list = new LinkedList();
 list.addToHead(1);
 list.addToHead(2);
 list.addToHead(3);
-list.removeHead();
-list.removeHead();
-list.removeHead();
-list.removeHead();
+list.addToTail(4);
+list.addToTail(5);
 
 console.log(list.size);
 console.log(list.printList());
