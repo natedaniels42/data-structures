@@ -54,6 +54,27 @@ class LinkedList {
         this.size++;
     }
 
+    removeTail() {
+        let current = this.head;
+        let previous = null;
+
+        if (!this.head) {
+            return null;
+        } else if (!this.head.getNextNode()) {
+            this.head = null;
+        } else {
+            while (current.getNextNode()) {
+                previous = current;
+                current = current.getNextNode();
+            }
+    
+            previous.setNextNode(null);
+        }
+
+        this.size--;
+        return current;
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
