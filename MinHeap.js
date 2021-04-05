@@ -1,7 +1,26 @@
 class MinHeap {
     constructor() {
-        this.heap = [null,1,2,0];
+        this.heap = [null];
         this.size = 0;
+    }
+
+    add(value) {
+        if (typeof value !== 'number') {
+            throw Error('Must be a Number');
+        } else {
+            this.heap.push(value);
+            this.size++;
+            this.bubbleUp();
+        }
+    }
+
+    bubbleUp() {
+        let current = this.size;
+
+        while (current > 1 && this.heap[current] < this.heap[this.getParent(current)]) {
+            this.swap(current, this.getParent(current));
+            current = this.getParent(current);
+        }
     }
 
     canSwap(current, left, right) {
@@ -30,7 +49,12 @@ class MinHeap {
 }
 
 const mh = new MinHeap();
-
+mh.add(10);
+mh.add(9);
+mh.add(8);
+mh.add(7);
+mh.add(6);
+mh.add(5);
 
 console.log(mh.heap);
 
