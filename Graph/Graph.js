@@ -59,34 +59,30 @@ class Graph {
         })
     }
 
+    breadthFirstTraversal(start) {
+        const visitedVertices = [start];
+        const visitQueue = new Queue();
+
+        visitQueue.enqueue(start);
+    
+        while(!visitQueue.isEmpty()) {
+            const current = visitQueue.dequeue().data;
+            console.log(current.data);
+
+            current.edges.forEach(edge => {
+                const neighbor = edge.end;
+
+                if (!visitedVertices.includes(neighbor)) {
+                    visitedVertices.push(neighbor);
+                    visitQueue.enqueue(neighbor);
+                }
+            })
+        }
+    }
+
     print() {
         this.vertices.map(vertex => vertex.print());
     }
 }
 
-const g = new Graph(true);
-
-const one = g.addVertex(1);
-const two = g.addVertex(2);
-const three = g.addVertex(3);
-const four = g.addVertex(4);
-const five = g.addVertex(5);
-const six = g.addVertex(6);
-const seven = g.addVertex(7);
-const eight = g.addVertex(8);
-const nine = g.addVertex(9);
-const ten = g.addVertex(10);
-
-g.addEdge(one, two, 100);
-g.addEdge(one, three, 200);
-g.addEdge(two, five, 400);
-g.addEdge(three, four, 150);
-g.addEdge(five, four, 250);
-g.addEdge(four, six, 600);
-g.addEdge(six, seven, 75);
-g.addEdge(seven, nine, 500);
-g.addEdge(six, eight, 450);
-g.addEdge(eight, ten, 1000);
-
-g.depthFirstTraversal(one);
-//g.print();
+module.exports = Graph;
