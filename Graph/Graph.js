@@ -46,6 +46,19 @@ class Graph {
         }
     }
 
+    depthFirstTraversal(start, visitedVertices = [start]) {
+        console.log(start.data);
+
+        start.edges.forEach(edge => {
+            const neighbor = edge.end;
+
+            if (!visitedVertices.includes(neighbor)) {
+                visitedVertices.push(neighbor);
+                this.depthFirstTraversal(neighbor, visitedVertices);
+            }
+        })
+    }
+
     print() {
         this.vertices.map(vertex => vertex.print());
     }
@@ -74,6 +87,6 @@ g.addEdge(six, seven, 75);
 g.addEdge(seven, nine, 500);
 g.addEdge(six, eight, 450);
 g.addEdge(eight, ten, 1000);
-g.removeVertex(six);
 
-g.print();
+g.depthFirstTraversal(one);
+//g.print();
