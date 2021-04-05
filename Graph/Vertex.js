@@ -14,6 +14,14 @@ class Vertex {
         }
     }
 
+    removeEdge(vertex) {
+        if (!(vertex instanceof Vertex)) {
+            throw Error('Must be a Vertex');
+        } else {
+            this.edges = this.edges.filter(edge => edge.end !== vertex);
+        }
+    }
+
     print() {
         const edgeList = this.edges.map(edge => edge.weight ? `${edge.end.data} (${edge.weight})` : `${edge.end.data}`);
         console.log(`${this.data} --> ${edgeList.join(', ')}`);

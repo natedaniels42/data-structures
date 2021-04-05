@@ -26,6 +26,17 @@ class Graph {
         }
     }
 
+    removeEdge(vertex1, vertex2) {
+        if (!(vertex1 instanceof Vertex) || !(vertex2 instanceof Vertex)) {
+            throw Error('Both must be Vertices');
+        } else {
+            vertex1.removeEdge(vertex2);
+            if (!this.isDirected) {
+                vertex2.removeEdge(vertex1);
+            }
+        }
+    }
+
     print() {
         this.vertices.map(vertex => vertex.print());
     }
