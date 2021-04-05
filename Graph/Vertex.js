@@ -13,6 +13,11 @@ class Vertex {
             this.edges.push(new Edge(this, vertex, weight));
         }
     }
+
+    print() {
+        const edgeList = this.edges.map(edge => edge.weight ? `${edge.end.data} (${edge.weight})` : `${edge.end.data}`);
+        console.log(`${this.data} --> ${edgeList.join(', ')}`);
+    }
 }
 
 module.exports = Vertex;
