@@ -23,6 +23,42 @@ class MinHeap {
         }
     }
 
+    popMin() {
+        if (this.size === 0) {
+            throw Error('Heap is empty');
+        } else {
+            this.swap(1, this.size);
+            const min = this.heap.pop();
+            this.size--;
+            this.heapify();
+            return min;
+        }
+    }
+
+    heapify() {
+        let current = 1;
+        let left = this.getLeft(current);
+        let right = this.getRight(current);
+
+        while(this.canSwap(current, left, right)) {
+            if (this.exists(left) && this.exists(right)) {
+                if (this.heap[left] < this.heap[right]) {
+                    this.swap(current, left);
+                    current = left;
+                } else {
+                    this.swap(current, right);
+                    current = right;
+                }
+            } else {
+                this.swap(current, left);
+                current = left;
+            }
+
+            left = this.getLeft(current);
+            right = this.getRight(current);
+        }
+    }
+
     canSwap(current, left, right) {
         return (this.exists(left) && this.heap[left] < this.heap[current]) || (this.exists(right) && this.heap[right] < this.heap[current]);
     }
@@ -48,13 +84,4 @@ class MinHeap {
     }
 }
 
-const mh = new MinHeap();
-mh.add(10);
-mh.add(9);
-mh.add(8);
-mh.add(7);
-mh.add(6);
-mh.add(5);
-
-console.log(mh.heap);
-
+module.exports = MinHeap;
