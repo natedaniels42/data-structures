@@ -5,6 +5,14 @@ class Vertex {
         this.data = data;
         this.edges = [];
     }
+
+    addEdge(vertex, weight = null) {
+        if (!(vertex instanceof Vertex)) {
+            throw Error('Must be a Vertex');
+        } else {
+            this.edges.push(new Edge(this, vertex, weight));
+        }
+    }
 }
 
 module.exports = Vertex;
