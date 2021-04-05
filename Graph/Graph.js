@@ -14,6 +14,15 @@ class Graph {
         return newVertex;
     }
 
+    removeVertex(vertex) {
+        if (!(vertex instanceof Vertex)) {
+            throw Error('Must be a Vertex');
+        } else {
+            vertex.edges.map(edge => edge.end.removeEdge(vertex));
+            this.vertices = this.vertices.filter(x => x !== vertex);
+        }
+    }
+
     addEdge(vertex1, vertex2, weight) {
         if (!(vertex1 instanceof Vertex) || !(vertex2 instanceof Vertex)) {
             throw Error('Both must be Vertices');
@@ -65,6 +74,6 @@ g.addEdge(six, seven, 75);
 g.addEdge(seven, nine, 500);
 g.addEdge(six, eight, 450);
 g.addEdge(eight, ten, 1000);
-
+g.removeVertex(six);
 
 g.print();
