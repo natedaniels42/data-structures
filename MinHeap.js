@@ -1,7 +1,19 @@
 class MinHeap {
     constructor() {
-        this.heap = [null];
+        this.heap = [null,1,2,0];
         this.size = 0;
+    }
+
+    canSwap(current, left, right) {
+        return (this.exists(left) && this.heap[left] < this.heap[current]) || (this.exists(right) && this.heap[right] < this.heap[current]);
+    }
+
+    exists(current) {
+        return current <= this.size;
+    } 
+
+    swap(a, b) {
+        [this.heap[a], this.heap[b]] = [this.heap[b], this.heap[a]];
     }
 
     getParent(current) {
@@ -20,6 +32,5 @@ class MinHeap {
 const mh = new MinHeap();
 
 
-console.log(mh.getParent(5));
-console.log(mh.getLeft(5));
-console.log(mh.getRight(5));
+console.log(mh.heap);
+
