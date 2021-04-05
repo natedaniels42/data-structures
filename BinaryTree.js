@@ -53,13 +53,4 @@ class BinaryTree {
     }
 }
 
-const bt = new BinaryTree(50);
-
-for (let i = 0; i < 20; i++) {
-    const random = Math.floor(Math.random() * 100);
-    bt.insert(random);
-}
-
-bt.depthFirstTraversal();
-
 module.exports = BinaryTree;
