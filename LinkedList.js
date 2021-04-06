@@ -129,6 +129,18 @@ class LinkedList {
         }
     }
 
+    reverseListRecursively(head = this.head) {
+        if (!head || !head.getNextNode()) {
+            return head;
+        }
+
+        const newHead = this.reverseListRecursively(head.getNextNode());
+        head.getNextNode().setNextNode(head);
+        head.setNextNode(null);
+        this.head = newHead;
+        return newHead;
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
