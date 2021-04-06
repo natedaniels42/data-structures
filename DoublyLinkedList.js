@@ -42,6 +42,20 @@ class DoublyLinkedList {
         return removedHead;
     }
 
+    addToTail(data) {
+        if (!this.head) {
+            return this.addToHead(data);
+        } 
+
+        const newTail = new Node(data);
+        const previousTail = this.tail;
+
+        this.tail = newTail;
+        newTail.setPreviousNode(previousTail);
+        previousTail.setNextNode(newTail);
+        this.size++;
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
@@ -73,6 +87,7 @@ const list = new DoublyLinkedList();
 list.addToHead(1);
 list.addToHead(2);
 list.addToHead(3);
+list.addToTail(4);
 
 
 
