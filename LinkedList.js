@@ -104,6 +104,31 @@ class LinkedList {
         }
     }
 
+    reverseList() {
+        if (!this.head) {
+            throw Error('List is empty');
+        }
+        
+        let current = this.head;
+        let previous = null;
+        let next = current.getNextNode();
+
+        if (!next) {
+            return this;
+        } else {
+            while(current) {
+                current.setNextNode(previous);
+                previous = current;
+                current = next;
+                if (current) {
+                    next = current.getNextNode();
+                }
+            }
+            this.head = previous;
+            return this;
+        }
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
