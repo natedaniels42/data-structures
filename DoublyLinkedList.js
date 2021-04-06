@@ -22,6 +22,26 @@ class DoublyLinkedList {
         this.size++;
     }
 
+    removeHead() {
+        const removedHead = this.head;
+
+        if (!removedHead) {
+            return null
+        }
+
+        if (!removedHead.getNextNode()) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = removedHead.getNextNode();
+            this.head.setPreviousNode(null);
+            removedHead.setNextNode(null);
+        }
+
+        this.size--;
+        return removedHead;
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
@@ -55,5 +75,7 @@ list.addToHead(2);
 list.addToHead(3);
 
 
+
 console.log(list.printList());
 console.log(list.printListFromTail());
+console.log(list.size);
