@@ -101,6 +101,32 @@ class DoublyLinkedList {
         return null;
     }
 
+    removeNodeByIndex(index) {
+        if (this.size - 1 < index) {
+            return null;
+        }
+
+        let current = index < this.size / 2 ? this.head : this.tail;
+        let counter = index < this.size / 2 ? 0 : this.size - 1;
+        let front = index < this.size / 2;
+        
+        while(counter !== index) {
+            if (front) {
+                current = current.getNextNode();
+                counter++;
+            } else {
+                current = current.getPreviousNode();
+                counter--;
+            }
+        }
+        current.getPreviousNode().setNextNode(current.getNextNode());
+        current.getNextNode().setPreviousNode(current.getPreviousNode());
+        current.setPreviousNode(null);
+        current.setNextNode(null);
+        this.size--;
+        return current;
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
@@ -129,13 +155,10 @@ class DoublyLinkedList {
 }
 
 const list = new DoublyLinkedList();
-for (let i = 1; i <= 100; i++) {
+for (let i = 0; i < 100; i++) {
     list.addToTail(i);
 }
 
-console.log(list.getNodeByData(79));
-
-
-//console.log(list.printList());
+console.log(list.printList());
 //console.log(list.printListFromTail());
 //console.log(list.size);
