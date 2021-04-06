@@ -13,9 +13,23 @@ class DoublyLinkedList {
 
         while(current) {
             str += `${current.data} `;
+            current = current.getNextNode();
         }
 
         str += '<tail>';
+        return str;
+    }
+
+    printListFromTail() {
+        let str = '<tail> ';
+        let current = this.tail;
+
+        while(current) {
+            str += `${current.data} `;
+            current = current.getPreviousNode();
+        }
+
+        str += '<head>';
         return str;
     }
 }
@@ -23,3 +37,4 @@ class DoublyLinkedList {
 const list = new DoublyLinkedList();
 
 console.log(list.printList());
+console.log(list.printListFromTail());
