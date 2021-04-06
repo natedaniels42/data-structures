@@ -127,6 +127,26 @@ class DoublyLinkedList {
         return current;
     }
 
+    reverseList() {
+        if (this.size < 2) {
+            return this;
+        }
+
+        let current = this.head;
+
+        while(current) {
+            let temp = current.getNextNode();
+            current.setNextNode(current.getPreviousNode());
+            current.setPreviousNode(temp);
+            current = temp;
+        }
+
+        let temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+        return this.head;
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
@@ -154,11 +174,4 @@ class DoublyLinkedList {
     }
 }
 
-const list = new DoublyLinkedList();
-for (let i = 0; i < 100; i++) {
-    list.addToTail(i);
-}
-
-console.log(list.printList());
-//console.log(list.printListFromTail());
-//console.log(list.size);
+module.exports = DoublyLinkedList;
