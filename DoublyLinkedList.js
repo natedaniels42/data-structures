@@ -76,6 +76,31 @@ class DoublyLinkedList {
         return removedTail;
     }
 
+    getNodeByData(data) {
+        if (this.size === 0) {
+            return null;
+        }
+
+        let left = this.head;
+        let right = this.tail;
+        let leftIndex = 0;
+        let rightIndex = this.size - 1;
+
+        while(leftIndex < rightIndex) {
+            if (left.data === data) {
+                return left;
+            } else if (right.data === data) {
+                return right;
+            }
+            left = left.getNextNode();
+            right = right.getPreviousNode();
+            leftIndex++;
+            rightIndex--;
+        }
+
+        return null;
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
@@ -104,14 +129,13 @@ class DoublyLinkedList {
 }
 
 const list = new DoublyLinkedList();
-list.addToHead(1);
-list.addToHead(2);
-list.addToHead(3);
-list.addToTail(4);
+for (let i = 1; i <= 100; i++) {
+    list.addToTail(i);
+}
+
+console.log(list.getNodeByData(79));
 
 
-
-
-console.log(list.printList());
-console.log(list.printListFromTail());
-console.log(list.size);
+//console.log(list.printList());
+//console.log(list.printListFromTail());
+//console.log(list.size);
