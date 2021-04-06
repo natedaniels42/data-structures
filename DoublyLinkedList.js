@@ -7,6 +7,21 @@ class DoublyLinkedList {
         this.size = 0;
     }
 
+    addToHead(data) {
+        const newHead = new Node(data);
+        const currentHead = this.head;
+
+        if (currentHead) {
+            newHead.setNextNode(currentHead);
+            currentHead.setPreviousNode(newHead);
+        } else {
+            this.tail = newHead;
+        }
+
+        this.head = newHead;
+        this.size++;
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
@@ -35,6 +50,10 @@ class DoublyLinkedList {
 }
 
 const list = new DoublyLinkedList();
+list.addToHead(1);
+list.addToHead(2);
+list.addToHead(3);
+
 
 console.log(list.printList());
 console.log(list.printListFromTail());
