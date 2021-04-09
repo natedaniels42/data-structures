@@ -1,5 +1,6 @@
 const Vertex = require('./Vertex');
 const Queue = require('../Queue');
+const PriorityQueue = require('./PriorityQueue');
 
 class Graph {
     constructor(isWeighted = false, isDirected = false) {
@@ -80,9 +81,63 @@ class Graph {
         }
     }
 
+    dijkstras(start) {
+        const distances = {};
+        const previous = {};
+        const queue = new PriorityQueue();
+        queue.add({vertex: start, priority: 0});
+
+        this.vertices.forEach(vertex => {
+            distances[vertex.data] = Infinity;
+            previous[vertex.data] = null;
+        })
+
+        distances[start.data] = 0;
+
+        while(!queue.isEmpty()) {
+            const { vertex } = queue.popMin();
+            
+            vertex.edges.forEach(edge => {
+                const alternate = edge.weight + distances[vertex.data];
+                const neighborValue = edge.end.data;
+
+                if (alternate < distances[neighborValue]) {
+                    distances[neighborValue] = alternate;
+                    previous[neighborValue] = vertex;
+
+                    queue.add({vertex: edge.end, priority: distances[neighborValue]});
+                }
+            })
+        }
+        return { distances, previous };
+    }
+
     print() {
         this.vertices.map(vertex => vertex.print());
     }
 }
+
+const g = new Graph(true);
+
+const one = g.addVertex(1);
+const two = g.addVertex(2);
+const three = g.addVertex(3);
+const four = g.addVertex(4);
+const five = g.addVertex(5);
+const six = g.addVertex(6);
+const seven = g.addVertex(7);
+const eight = g.addVertex(8);
+
+
+g.addEdge(one, two, 100);
+g.addEdge(one, three, 150);
+g.addEdge(two, four, 200);
+g.addEdge(three, five, 125);
+g.addEdge(five, six, 350);
+g.addEdge(six, seven, 175);
+g.addEdge(six, eight, 110);
+g.addEdge(five, eight, 90);
+
+console.log(g.dijkstras(one));
 
 module.exports = Graph;
