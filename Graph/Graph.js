@@ -112,32 +112,23 @@ class Graph {
         return { distances, previous };
     }
 
+    shortestPath(start, end) {
+        const { distances, previous } = this.dijkstras(start);
+        const distance = distances[end.data];
+        const path = [];
+        let current = end;
+
+        while(current) {
+            path.unshift(current.data);
+
+            current = previous[current.data];
+        }
+        return { distance, path };
+    }
+
     print() {
         this.vertices.map(vertex => vertex.print());
     }
 }
-
-const g = new Graph(true);
-
-const one = g.addVertex(1);
-const two = g.addVertex(2);
-const three = g.addVertex(3);
-const four = g.addVertex(4);
-const five = g.addVertex(5);
-const six = g.addVertex(6);
-const seven = g.addVertex(7);
-const eight = g.addVertex(8);
-
-
-g.addEdge(one, two, 100);
-g.addEdge(one, three, 150);
-g.addEdge(two, four, 200);
-g.addEdge(three, five, 125);
-g.addEdge(five, six, 350);
-g.addEdge(six, seven, 175);
-g.addEdge(six, eight, 110);
-g.addEdge(five, eight, 90);
-
-console.log(g.dijkstras(one));
 
 module.exports = Graph;
