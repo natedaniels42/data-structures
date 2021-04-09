@@ -1,5 +1,3 @@
-const Vertex = require('./Vertex');
-
 class PriorityQueue {
     constructor() {
         this.heap = [null];
@@ -18,6 +16,37 @@ class PriorityQueue {
         while(current > 1 && this.heap[current].priority < this.heap[this.getParent(current)].priority) {
             this.swap(current, this.getParent(current));
             current = this.getParent(current);
+        }
+    }
+
+    popMin() {
+        this.swap(1, this.size);
+        const min = this.heap.pop();
+        this.size--;
+        this.heapify();
+        return min;
+    }
+
+    heapify() {
+        let current = 1;
+        let left = this.getLeft(current);
+        let right = this.getRight(current);
+
+        while(this.canSwap(current, left, right)) {
+            if (this.exists(left) && this.exists(right)) {
+                if (this.heap[left].priority < this.heap[right].priority) {
+                    this.swap(current, left);
+                    current = left;
+                } else {
+                    this.swap(current, right);
+                    current = right;
+                }
+            } else {
+                this.swap(current, left);
+                current = left;
+            }
+            left = this.getLeft(current);
+            right = this.getRight(current);
         }
     }
 
@@ -51,11 +80,4 @@ class PriorityQueue {
     }
 }
 
-const pq = new PriorityQueue();
-const twenty = new Vertex(20);
-const ten = new Vertex(10);
-const five = new Vertex(5);
-pq.add({vertex: twenty, priority: 20});
-pq.add({vertex: ten, priority: 10});
-pq.add({vertex: five, priority: 5});
-console.log(pq.heap);
+module.exports = PriorityQueue;
