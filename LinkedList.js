@@ -141,6 +141,16 @@ class LinkedList {
         return newHead;
     }
 
+    deleteList() {
+        if (!this.head) {
+            return null
+        }
+
+        while (this.head) {
+            this.removeHead();
+        }
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
