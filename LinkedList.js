@@ -175,6 +175,26 @@ class LinkedList {
         return secondPointer.data;
     }
 
+    getMiddleNode() {
+        let firstPointer = this.head;
+        let secondPointer = this.head;
+        let counter = 0;
+
+        if (!firstPointer) {
+            return null;
+        }
+
+        while (firstPointer) {
+            counter++;
+            firstPointer = firstPointer.getNextNode();
+            if (counter % 2 === 0) {
+                secondPointer = secondPointer.getNextNode();
+            }
+        }
+
+        return secondPointer.data;
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
