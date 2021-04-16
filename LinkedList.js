@@ -151,6 +151,30 @@ class LinkedList {
         }
     }
 
+    getNthNodeFromEnd(n) {
+        let firstPointer = this.head;
+        let secondPointer = this.head;
+        let counter = 0;
+
+        if (!firstPointer) {
+            return null;
+        }
+
+        while (firstPointer) {
+            counter++;
+            firstPointer = firstPointer.getNextNode();
+            if (counter > n) {
+                secondPointer = secondPointer.getNextNode();
+            }
+        }
+
+        if (counter < n) {
+            return null;
+        } 
+
+        return secondPointer.data;
+    }
+
     printList() {
         let str = '<head> ';
         let current = this.head;
