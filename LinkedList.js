@@ -207,6 +207,19 @@ class LinkedList {
         str += '<tail>';
         return str;
     }
+
+    printListFromTail() {
+        let str = '';
+        let current = this.head;
+
+        while (current) {
+            str = `${current.data} ${str}`;
+            current = current.getNextNode();
+        }
+
+        str = `<tail> ${str}<head>`;
+        return str;
+    }
 }
 
 module.exports = LinkedList;
