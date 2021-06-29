@@ -79,6 +79,31 @@ class BinaryTree {
 
         return tree1.value === tree2.value && tree1.isIdentical(tree1.left, tree2.left) && tree1.isIdentical(tree1.right, tree2.right)
     }
+
+    printBottomView() {
+        if (this.left) {
+            this.left.printBottomView();
+        }
+        if (this.right) {
+            this.right.printBottomView();
+        }
+        if (!this.left && !this.right) {
+            console.log(this.value);
+        }
+    }
 }
+
+const bt = new BinaryTree(50);
+bt.insert(25);
+bt.insert(75);
+bt.insert(10);
+bt.insert(60);
+bt.insert(35);
+bt.insert(90);
+bt.insert(30);
+bt.insert(85);
+
+
+bt.printBottomView();
 
 module.exports = BinaryTree;
