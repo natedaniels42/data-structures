@@ -61,18 +61,24 @@ class BinaryTree {
             this.right.preorderTraversal();
         }
     }
+
+    postorderTraversal() {
+        if (this.left) {
+            this.left.postorderTraversal();
+        }
+        if (this.right) {
+            this.right.postorderTraversal();
+        }
+        console.log(this.value);
+    }
+
+    isIdentical(tree2, tree1 = this) {
+        if (tree1 === null && tree2 === null) {
+            return true;
+        }
+
+        return tree1.value === tree2.value && tree1.isIdentical(tree1.left, tree2.left) && tree1.isIdentical(tree1.right, tree2.right)
+    }
 }
-
-const bt = new BinaryTree(50);
-bt.insert(25);
-bt.insert(75);
-bt.insert(10);
-bt.insert(60);
-bt.insert(35);
-bt.insert(90);
-bt.insert(30);
-bt.insert(85);
-
-bt.preorderTraversal();
 
 module.exports = BinaryTree;
