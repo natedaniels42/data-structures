@@ -51,6 +51,28 @@ class BinaryTree {
             this.right.depthFirstTraversal();
         }
     }
+
+    preorderTraversal() {
+        console.log(this.value);
+        if (this.left) {
+            this.left.preorderTraversal();
+        }
+        if (this.right) {
+            this.right.preorderTraversal();
+        }
+    }
 }
+
+const bt = new BinaryTree(50);
+bt.insert(25);
+bt.insert(75);
+bt.insert(10);
+bt.insert(60);
+bt.insert(35);
+bt.insert(90);
+bt.insert(30);
+bt.insert(85);
+
+bt.preorderTraversal();
 
 module.exports = BinaryTree;
