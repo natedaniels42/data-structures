@@ -1,3 +1,5 @@
+const Queue = require('./Queue');
+
 class BinaryTree {
     constructor(value, depth = 1) {
         this.value = value;
@@ -49,6 +51,24 @@ class BinaryTree {
         console.log(this.value);
         if (this.right) {
             this.right.depthFirstTraversal();
+        }
+    }
+
+    breadthFirstTraversal() {
+        const queue = new Queue();
+
+        queue.enqueue(this);
+        
+        while (!queue.isEmpty()) {
+            const current = queue.dequeue().data;
+
+            console.log(current.value);
+            if (current.left) {
+                queue.enqueue(current.left);
+            } 
+            if (current.right) {
+                queue.enqueue(current.right);
+            }
         }
     }
 
@@ -104,6 +124,6 @@ bt.insert(30);
 bt.insert(85);
 
 
-bt.printBottomView();
+bt.breadthFirstTraversal();
 
 module.exports = BinaryTree;
